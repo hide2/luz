@@ -20,7 +20,7 @@
     luarocks install rapidjson
 
 ## Usage
-- test_http.lua
+- hello.lua
 ```Lua
 local Http = require("./lib/http").Http
 
@@ -45,9 +45,17 @@ server:listen({}, onRequest)
 print("Http Server listening at http://0.0.0.0:8080/")
 ```
 
-    luvit test_http.lua
+    luvit hello.lua
 
 ## Benchmark
+- luvit hello.lua
 
-    ab -c 1000 -n 1000000 -k http://0.0.0.0:8000/
+    ab -c 1000 -n 1000000 -k http://0.0.0.0:8080/
 
+Requests per second: 30000 #/sec
+
+- luvit rand.lua
+
+    ab -c 1000 -n 1000000 -k http://0.0.0.0:8080/rand?n=1000000
+
+Requests per second: 30000 #/sec
