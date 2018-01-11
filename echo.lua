@@ -15,9 +15,8 @@ local function prepareHeader(req, body)
 	return header
 end
 
-local function onRand(params)
-	local n = params.n or 100
-	local body = JSON.encode({n = n, rand = math.random(n)})
+local function onEcho(params)
+	local body = JSON.encode({ msg = params.msg})
 	return body
 end
 
@@ -25,8 +24,8 @@ local function dispatchRequest(client, req)
 	local body = ''
 	
 	-- dispatch request urls here
-	r:get('/rand/:n', function(params)
-		body = onRand(params)
+	r:get('/echo/:msg', function(params)
+		body = onEcho(params)
 	end)
 
 	r:execute(req.method, req.path)
