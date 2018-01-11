@@ -155,7 +155,7 @@ print("Http Server listening at http://0.0.0.0:8003/user/:id")
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8001/
 
-Requests per second: 26000 #/sec
+Requests per second: 27000 #/sec
 
 - luvit echo.lua
 
