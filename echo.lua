@@ -36,4 +36,4 @@ end
 local server = Http:new()
 server:listen({port=8002}, dispatchRequest)
 
-print("Http Server listening at http://0.0.0.0:8002/")
+print("Http Server listening at http://0.0.0.0:8002/echo/:msg")

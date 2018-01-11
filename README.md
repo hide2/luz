@@ -46,7 +46,7 @@ print("Http Server listening at http://0.0.0.0:8001/")
 
     luvit hello.lua
 
-- echo.lua
+- echo.lua(with routing and JSON codec)
 ```Lua
 local Http = require("./luz/http").Http
 local r = require("./luz/router").new()
@@ -102,4 +102,4 @@ Requests per second: 30000 #/sec
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8002/echo/hello
 
-Requests per second: 30000 #/sec
+Requests per second: 20000 #/sec
