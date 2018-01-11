@@ -131,7 +131,7 @@ Requests per second: 27000 #/sec
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8002/echo/hello
 
-Requests per second: 21000 #/sec
+Requests per second: 24000 #/sec
 
 - luvit db.lua
 
