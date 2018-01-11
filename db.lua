@@ -47,7 +47,6 @@ local function onUser(params)
 	local user
 	for id, name, email in rows (db, "select id, name, email from user where id = "..params.id) do
 		user = {id = id, name = name, email = email}
-		p(user)
 	end
 	local body = JSON.encode(user)
 	return body
