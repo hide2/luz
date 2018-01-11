@@ -44,8 +44,6 @@ server:listen({}, onRequest)
 print("Http Server listening at http://0.0.0.0:8001/")
 ```
 
-    luvit hello.lua
-
 - echo.lua(with routing and JSON codec)
 ```Lua
 local Http = require("./luz/http").Http
@@ -89,7 +87,10 @@ server:listen({port=8002}, dispatchRequest)
 print("Http Server listening at http://0.0.0.0:8002/")
 ```
 
-    luvit echo.lua
+- db.lua(with routing and JSON codec and SQLite)
+```Lua
+local Http = require("./luz/http").Http
+```
 
 ## Benchmark
 - luvit hello.lua
@@ -101,5 +102,11 @@ Requests per second: 30000 #/sec
 - luvit echo.lua
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8002/echo/hello
+
+Requests per second: 21000 #/sec
+
+- luvit db.lua
+
+    ab -c 1000 -n 1000000 -k http://0.0.0.0:8003/user/1
 
 Requests per second: 20000 #/sec
