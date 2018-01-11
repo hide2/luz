@@ -2,8 +2,8 @@
 luz gets 3X performance of Nodejs, 4.5X of expressjs, 18X of Lumen.
 See benchmark result of the same "hello" example with single process:
 - luz: 27000 #/sec
-- Nodejs: 9000 #/sec
-- expressjs: 6000 #/sec
+- Node.js: 9000 #/sec
+- Express: 6000 #/sec
 - Lumen: 1500 #/sec
 
 ## Install
