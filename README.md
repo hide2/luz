@@ -22,7 +22,7 @@
 ## Usage
 - hello.lua
 ```Lua
-local Http = require("./lib/http").Http
+local Http = require("./luz/http").Http
 
 local function onRequest(client, req)
 	local body = "Hello!"
@@ -41,11 +41,37 @@ end
 local server = Http:new()
 server:listen({}, onRequest)
 
-
 print("Http Server listening at http://0.0.0.0:8080/")
 ```
 
     luvit hello.lua
+
+- rand.lua
+```Lua
+local Http = require("./luz/http").Http
+
+local function onRequest(client, req)
+	p(req.path)
+	local body = "Hello!"
+	local header = {
+		code = 200,
+		{ "Server", "Luz" },
+		{ "Content-Type", "text/plain" },
+		{ "Content-Length", #body },
+	}
+	if req.keepAlive then
+		header[#header + 1] = { "Connection", "Keep-Alive" }
+	end
+	client:respond(header, body)
+end
+
+local server = Http:new()
+server:listen({port=8181}, onRequest)
+
+print("Http Server listening at http://0.0.0.0:8181/")
+```
+
+    luvit rand.lua
 
 ## Benchmark
 - luvit hello.lua
@@ -56,6 +82,6 @@ Requests per second: 30000 #/sec
 
 - luvit rand.lua
 
-    ab -c 1000 -n 1000000 -k http://0.0.0.0:8080/rand?n=1000000
+    ab -c 1000 -n 1000000 -k http://0.0.0.0:8181/rand?n=1000000
 
 Requests per second: 30000 #/sec

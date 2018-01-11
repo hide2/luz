@@ -17,5 +17,4 @@ end
 local server = Http:new()
 server:listen({}, onRequest)
 
-
 print("Http Server listening at http://0.0.0.0:8080/")
