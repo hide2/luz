@@ -26,7 +26,7 @@ local function dispatchRequest(client, req)
 	if req.path == '/rand?n=1000000' then
 		body = onRand(req)
 	end
-	local header = prepareHeader(req)
+	local header = prepareHeader(req, body)
 	client:respond(header, body)
 end
 
