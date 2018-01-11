@@ -1,7 +1,7 @@
 local Http = require("./luz/http").Http
 local JSON = require('rapidjson')
 
-local function prepareHeader(req)
+local function prepareHeader(req, body)
 	local header = {
 		code = 200,
 		{ "Server", "Luz" },
@@ -22,11 +22,11 @@ local function onRand(req)
 end
 
 local function dispatchRequest(client, req)
-	local header = prepareHeader(req)
 	local body = ''
 	if req.path == '/rand?n=1000000' then
 		body = onRand(req)
 	end
+	local header = prepareHeader(req)
 	client:respond(header, body)
 end
 
