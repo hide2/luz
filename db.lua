@@ -18,7 +18,7 @@ local list = {
   { id=3, name="Maria das Dores", email="maria@dores.com", },
 }
 for i, p in pairs (list) do
-  res = assert (con:execute(string.format([[
+  res = assert (db:execute(string.format([[
     INSERT INTO user
     VALUES ('%s', '%s', '%s')]], p.id, p.name, p.email)
   ))
