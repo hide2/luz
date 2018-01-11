@@ -49,10 +49,10 @@ print("Http Server listening at http://0.0.0.0:8001/")
 - rand.lua
 ```Lua
 local Http = require("./luz/http").Http
+local r = require("./luz/router").new()
+local JSON = require('rapidjson')
 
-local function onRequest(client, req)
-	p(req.path)
-	local body = "Hello!"
+local function prepareHeader(req, body)
 	local header = {
 		code = 200,
 		{ "Server", "Luz" },
@@ -62,11 +62,30 @@ local function onRequest(client, req)
 	if req.keepAlive then
 		header[#header + 1] = { "Connection", "Keep-Alive" }
 	end
+	return header
+end
+
+local function onRand(params)
+	local n = params.n or 100
+	local body = JSON.encode({n = n, rand = math.random(n)})
+	return body
+end
+
+local function dispatchRequest(client, req)
+	local body = ''
+	
+	-- dispatch request urls here
+	r:get('/rand/:n', function(params)
+		body = onRand(params)
+	end)
+
+	r:execute(req.method, req.path)
+	local header = prepareHeader(req, body)
 	client:respond(header, body)
 end
 
 local server = Http:new()
-server:listen({port=8181}, onRequest)
+server:listen({port=8002}, dispatchRequest)
 
 print("Http Server listening at http://0.0.0.0:8002/")
 ```
@@ -82,6 +101,6 @@ Requests per second: 30000 #/sec
 
 - luvit rand.lua
 
-    ab -c 1000 -n 1000000 -k http://0.0.0.0:8002/rand?n=1000000
+    ab -c 1000 -n 1000000 -k http://0.0.0.0:8002/rand/1000000
 
 Requests per second: 30000 #/sec
