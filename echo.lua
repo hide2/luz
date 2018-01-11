@@ -1,3 +1,4 @@
+local app = require("./luz/app").app
 local Http = require("./luz/http").Http
 local r = require("./luz/router").new()
 local JSON = require('rapidjson')
@@ -37,3 +38,12 @@ local server = Http:new()
 server:listen({port=8002}, dispatchRequest)
 
 print("Http Server listening at http://0.0.0.0:8002/echo/:msg")
+
+local app = require("./luz/app").app:new()
+
+app:get('/', function()
+	return "hello"
+end);
+app:listen({port=8001}, onRequest)
+
+print("Http Server listening at http://0.0.0.0:8001/")
