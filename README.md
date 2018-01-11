@@ -101,14 +101,17 @@ print("Http Server listening at http://0.0.0.0:8003/user/:id")
 - luvit hello.lua
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8001/
+
     Requests per second: 27000 #/sec
 
 - luvit echo.lua
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8002/echo/hello
+
     Requests per second: 24000 #/sec
 
 - luvit db.lua
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8003/user/1
+
     Requests per second: 10000 #/sec
