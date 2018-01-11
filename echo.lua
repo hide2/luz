@@ -1,3 +1,13 @@
+local app = require("./luz/app").app:new()
+
+app:get('/', function()
+	return "hello"
+end)
+app:listen({port=8002})
+
+print("Http Server listening at http://0.0.0.0:8002/echo/:msg")
+
+
 local app = require("./luz/app").app
 local Http = require("./luz/http").Http
 local r = require("./luz/router").new()

@@ -26,8 +26,8 @@ local app = require("./luz/app").app:new()
 
 app:get('/', function()
 	return "hello"
-end);
-app:listen({port=8001}, onRequest)
+end)
+app:listen({port=8001})
 
 print("Http Server listening at http://0.0.0.0:8001/")
 ```
@@ -155,7 +155,7 @@ print("Http Server listening at http://0.0.0.0:8003/user/:id")
 
     ab -c 1000 -n 1000000 -k http://0.0.0.0:8001/
 
-Requests per second: 30000 #/sec
+Requests per second: 26000 #/sec
 
 - luvit echo.lua
 
