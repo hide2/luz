@@ -4,8 +4,8 @@ local JSON = require("rapidjson")
 local env = require("luasql.sqlite3").sqlite3()
 local db = env:connect("/tmp/test.sqlite3")
 
-db:exec"DROP TABLE user"
-db:exec[[
+db:execute"DROP TABLE user"
+db:execute[[
   CREATE TABLE user(
     id  INT PRIMARY KEY,
     name  VARCHAR(50),
@@ -18,13 +18,13 @@ local list = {
   { id=3, name="Maria das Dores", email="maria@dores.com", },
 }
 for i, p in pairs (list) do
-  res = assert (con:exec(string.format([[
+  res = assert (con:execute(string.format([[
     INSERT INTO user
     VALUES ('%s', '%s', '%s')]], p.id, p.name, p.email)
   ))
 end
 local function rows (connection, sql_statement)
-  local cursor = assert (connection:exec (sql_statement))
+  local cursor = assert (connection:execute (sql_statement))
   return function ()
     return cursor:fetch()
   end
@@ -61,7 +61,7 @@ local function dispatchRequest(client, req)
 		body = onUser(params)
 	end)
 
-	r:exec(req.method, req.path)
+	r:execute(req.method, req.path)
 	local header = prepareHeader(req, body)
 	client:respond(header, body)
 end
