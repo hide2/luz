@@ -15,6 +15,6 @@ local function onRequest(client, req)
 end
 
 local server = Http:new()
-server:listen({}, onRequest)
+server:listen({port=8001}, onRequest)
 
-print("Http Server listening at http://0.0.0.0:8080/")
+print("Http Server listening at http://0.0.0.0:8001/")

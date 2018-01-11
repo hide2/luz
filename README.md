@@ -41,7 +41,7 @@ end
 local server = Http:new()
 server:listen({}, onRequest)
 
-print("Http Server listening at http://0.0.0.0:8080/")
+print("Http Server listening at http://0.0.0.0:8001/")
 ```
 
     luvit hello.lua
@@ -68,7 +68,7 @@ end
 local server = Http:new()
 server:listen({port=8181}, onRequest)
 
-print("Http Server listening at http://0.0.0.0:8181/")
+print("Http Server listening at http://0.0.0.0:8002/")
 ```
 
     luvit rand.lua
@@ -76,12 +76,12 @@ print("Http Server listening at http://0.0.0.0:8181/")
 ## Benchmark
 - luvit hello.lua
 
-    ab -c 1000 -n 1000000 -k http://0.0.0.0:8080/
+    ab -c 1000 -n 1000000 -k http://0.0.0.0:8001/
 
 Requests per second: 30000 #/sec
 
 - luvit rand.lua
 
-    ab -c 1000 -n 1000000 -k http://0.0.0.0:8181/rand?n=1000000
+    ab -c 1000 -n 1000000 -k http://0.0.0.0:8002/rand?n=1000000
 
 Requests per second: 30000 #/sec
