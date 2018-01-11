@@ -15,7 +15,7 @@ local function prepareHeader(req, body)
 end
 
 local function onRand(req)
-	local n = req.args.n or 100
+	local n = req.n or 100
 	local body = JSON.encode({n = n, rand = math.random(n)})
 	print(body)
 	return body
