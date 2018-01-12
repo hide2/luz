@@ -17,14 +17,14 @@ function DB:initialize(driver, ...)
 	end
 end
 
-function DB:select(...)
+function DB:select(statement, needcolumn)
+	needcolumn = needcolumn and "a"
 	local _rows = {}
-	cur = self._conn:execute(...)
-	row = cur:fetch({}, "a")
+	cur = self._conn:execute(statement)
+	row = cur:fetch({}, needcolumn)
 	while row do
-		if #row == 1 then row = row[1] end
 		table.insert(_rows, row)
-		row = cur:fetch(row, "a")
+		row = cur:fetch(row, needcolumn)
 	end
 	if #_rows == 0 then
 		return nil
