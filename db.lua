@@ -23,16 +23,6 @@ for i, p in pairs (list) do
   ))
 end
 
-p(db:select("select id, name, email from user where id = 1", true))
-p(db:select("select name from user where id = 1"))
-p(db:select("select * from user where id = 1", true))
-p(db:select("select * from user where id = 4", true))
-p(db:select("select name from user"))
-local users = db:select("select * from user", true)
-for _, u in pairs(users) do
-  p(u)
-end
-
 app:get('/user/:id', function(params)
 	local user = db:select("select id, name, email from user where id = "..params.id)
 	return JSON.encode(user)
