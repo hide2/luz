@@ -60,11 +60,12 @@ function Http:listen(options, cb)
 		self._handle = self._handle or uv.new_tcp()
 	end
 	uv.tcp_bind(self._handle, self._ip, self._port)
-	uv.listen(self._handle, 128, function()
+	local ret = uv.listen(self._handle, 128, function()
 		local client = uv.new_tcp()
 		self._handle:accept(client)
 		process(client, cb)
 	end)
+	assert(ret >= 0, 'listen error:'..ret)
 end
 
 function Http:respond(header, body)
@@ -91,7 +92,7 @@ function Http:request(options, cb)
 		end
 		self._ip = res[1].addr
 		self._port = res[1].port
-		
+
 		client:connect(self._ip, self._port, function(err)
 			if err then error(err) end
 
