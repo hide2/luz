@@ -22,9 +22,17 @@ See benchmark result of the same "hello" example with single process:
 
     ./configure; make bootstrap
 
-- Install rapidjson
+- Install rapidjson(optional)
 
     luarocks install rapidjson
+
+- Install luasql(optional)
+
+    luarocks install luasql-sqlite3
+
+    luarocks install luasql-postgres
+
+    luarocks install luasql-mysql
 
 ## Usage
 - hello.lua
@@ -38,6 +46,9 @@ app:listen({port=8001})
 
 print("Http Server listening at http://0.0.0.0:8001/")
 ```
+Run:
+
+    luvit hello.lua
 
 - echo.lua(with routing and JSON codec)
 ```Lua
