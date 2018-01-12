@@ -1,6 +1,6 @@
 local app = require("./luz/app").app:new()
 local JSON = require('rapidjson')
-local db = require("./luz/db").DB:new():connect("/tmp/test.sqlite3")
+local db = require("./luz/db").DB:new("/tmp/test.sqlite3")
 
 -- prepare db
 db:run"DROP TABLE user"
