@@ -24,16 +24,16 @@ local function rows(connection, sql_statement)
 	end
 end
 function DB:select(...)
-	local rows = {}
+	local _rows = {}
 	for row in rows(self._conn, ...) do
-		table.insert(rows, row)
+		table.insert(_rows, row)
 	end
-	if #rows == 0 then
+	if #_rows == 0 then
 		return nil
-	elseif #rows == 1 then
-		return rows[1]
+	elseif #_rows == 1 then
+		return _rows[1]
 	else
-		return rows
+		return _rows
 	end
 end
 
