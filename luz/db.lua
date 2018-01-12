@@ -25,8 +25,11 @@ local function rows(connection, sql_statement)
 end
 function DB:select(...)
 	local _rows = {}
-	for row in rows(self._conn, ...) do
-		table.insert(_rows, row)
+	while true
+		local r = {rows(self._conn, ...)}
+		if #r == 0 then break end
+		if #r == 1 then r = r[1] end
+		table.insert(_rows, r)
 	end
 	if #_rows == 0 then
 		return nil
