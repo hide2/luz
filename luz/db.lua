@@ -17,19 +17,14 @@ function DB:initialize(driver, ...)
 	end
 end
 
-local function rows(connection, sql_statement)
-	local cursor = assert (connection:execute(sql_statement))
-	return function ()
-		return cursor:fetch()
-	end
-end
 function DB:select(...)
 	local _rows = {}
-	while true do
-		local r = {rows(self._conn, ...)}
-		if #r == 0 then break end
-		if #r == 1 then r = r[1] end
-		table.insert(_rows, r)
+	cur = self.conn:execute(...)
+	row = cur:fetch()
+	while row do
+		if #row == 1 then row = row[1] end
+		table.insert(_rows, row)
+		row = cur:fetch(row)
 	end
 	if #_rows == 0 then
 		return nil
