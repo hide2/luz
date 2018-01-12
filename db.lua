@@ -24,7 +24,7 @@ for i, p in pairs (list) do
 end
 
 app:get('/user/:id', function(params)
-	local user = db:select("select id, name, email from user where id = "..params.id)
+	local user = db:select("select id, name, email from user where id = "..params.id, true)
 	return JSON.encode(user)
 end)
 app:listen({port=8003})
