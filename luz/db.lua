@@ -25,7 +25,7 @@ local function rows(connection, sql_statement)
 end
 function DB:select(...)
 	local _rows = {}
-	while true
+	while true do
 		local r = {rows(self._conn, ...)}
 		if #r == 0 then break end
 		if #r == 1 then r = r[1] end
