@@ -23,7 +23,9 @@ function DB:select(statement, needcolumn)
 	cur = self._conn:execute(statement)
 	row = cur:fetch({}, needcolumn)
 	while row do
-		table.insert(_rows, row)
+		local r= row
+		if #row == 1 then r = row[1] then
+		table.insert(_rows, r)
 		row = cur:fetch(row, needcolumn)
 	end
 	if #_rows == 0 then
