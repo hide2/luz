@@ -26,7 +26,7 @@ function DB:select(statement, needcolumn)
 		local r= row
 		if #row == 1 then r = row[1] end
 		table.insert(_rows, r)
-		row = cur:fetch(row, needcolumn)
+		row = cur:fetch({}, needcolumn)
 	end
 	if #_rows == 0 then
 		return nil
