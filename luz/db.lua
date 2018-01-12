@@ -19,7 +19,7 @@ end
 
 function DB:select(...)
 	local _rows = {}
-	cur = self.conn:execute(...)
+	cur = self._conn:execute(...)
 	row = cur:fetch()
 	while row do
 		if #row == 1 then row = row[1] end
