@@ -1,9 +1,8 @@
 local app = require("./luz/app").app:new()
-local JSON = require('rapidjson')
 local Model = require("./luz/model").Model
+local JSON = require('rapidjson')
 
 local UserModel = Model:extend()
-
 local User = UserModel:new("sqlite3", "/tmp/test.sqlite3")
 print("------------------------ User:new")
 p(User)
