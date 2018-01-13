@@ -4,7 +4,6 @@ local DB = Object:extend()
 
 function DB:initialize(driver, ...)
 	self._driver = driver or self._driver
-	self._options = ... or self._options
 	if self._driver == 'sqlite3' then
 		self._env = require("luasql.sqlite3").sqlite3()
 	elseif self._driver == 'postgres' then
