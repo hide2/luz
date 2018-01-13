@@ -19,8 +19,8 @@ end
 function DB:select(statement, needcolumn)
 	needcolumn = needcolumn and "a"
 	local _rows = {}
-	cur = self._conn:execute(statement)
-	row = cur:fetch({}, needcolumn)
+	local cur = self._conn:execute(statement)
+	local row = cur:fetch({}, needcolumn)
 	while row do
 		local r= row
 		if #row == 1 then r = row[1] end
