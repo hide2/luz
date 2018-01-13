@@ -1,3 +1,5 @@
+local app = require("./luz/app").app:new()
+local JSON = require('rapidjson')
 local Model = require("./lux/model").Model
 
 local UserModel = Model:extend()
@@ -44,9 +46,17 @@ p(User:update({name='Jack2'},{email='maria@dores.com'}))
 print("------------------------ User:where({name='Jack2'})")
 p(User:where({name='Jack2'}))
 
-print("------------------------ User:destroy({id=1})")
-p(User:destroy({id=1}))
+print("------------------------ User:destroy({id=2})")
+p(User:destroy({id=2}))
 print("------------------------ User:destroy({name='Jack2'})")
 p(User:destroy({name='Jack2'}))
 print("------------------------ User:all")
 p(User:all())
+
+app:get('/user/:id', function(params)
+	local user = User:find(params.id)
+	return JSON.encode(user)
+end)
+app:listen({port=8003})
+
+print("Http Server listening at http://0.0.0.0:8003/user/:id")
