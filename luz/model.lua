@@ -20,17 +20,17 @@ function Model:save(row)
 		table.insert(vs, "'"..v.."'")
 	end
 	local sql = string.format("insert into %s(%s) values(%s)", self.table, table.concat(ks, ','), table.concat(vs, ','))
-	p("[sql]", sql)
+	-- p("[sql]", sql)
 	return self.db:run(sql)
 end
 function Model:all()
 	local sql = string.format("select * from %s", self.table)
-	p("[sql]", sql)
+	-- p("[sql]", sql)
 	return self.db:select(sql, true)
 end
 function Model:find(id)
 	local sql = string.format("select * from %s where id = %s", self.table, id)
-	p("[sql]", sql)
+	-- p("[sql]", sql)
 	return self.db:select(sql, true)
 end
 function Model:where(wkv)
@@ -39,7 +39,7 @@ function Model:where(wkv)
 		table.insert(wkvs, k.."='"..v.."'")
 	end
 	local sql = string.format("select * from %s where %s", self.table, table.concat(wkvs, ' and '))
-	p("[sql]", sql)
+	-- p("[sql]", sql)
 	return self.db:select(sql, true)
 end
 function Model:update(kv, wkv)
@@ -52,7 +52,7 @@ function Model:update(kv, wkv)
 		table.insert(wkvs, k.."='"..v.."'")
 	end
 	local sql = string.format("update %s set %s where %s", self.table, table.concat(kvs, ','), table.concat(wkvs, ' and '))
-	p("[sql]", sql)
+	-- p("[sql]", sql)
 	return self.db:run(sql)
 end
 function Model:destroy(wkv)
@@ -61,7 +61,7 @@ function Model:destroy(wkv)
 		table.insert(wkvs, k.."='"..v.."'")
 	end
 	local sql = string.format("delete from %s where %s", self.table, table.concat(wkvs, ' and '))
-	p("[sql]", sql)
+	-- p("[sql]", sql)
 	return self.db:run(sql)
 end
 
