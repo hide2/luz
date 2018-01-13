@@ -1,6 +1,6 @@
 local app = require("./luz/app").app:new()
 local JSON = require('rapidjson')
-local Model = require("./lux/model").Model
+local Model = require("./luz/model").Model
 
 local UserModel = Model:extend()
 
