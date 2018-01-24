@@ -65,12 +65,10 @@ print("Http Server listening at http://0.0.0.0:8002/echo/:msg")
 
 - user.lua(with routing and JSON codec and SQLite)
 ```Lua
+local db = require("./luz/db").DB:new("sqlite3", "/tmp/test.sqlite3")
+local User = require("./luz/db").Model:extend():new(db)
 local app = require("./luz/app").app:new()
-local Model = require("./luz/model").Model
 local JSON = require('rapidjson')
-
-local UserModel = Model:extend()
-local User = UserModel:new("sqlite3", "/tmp/test.sqlite3")
 
 -- prepare db
 User.db:run"DROP TABLE user"

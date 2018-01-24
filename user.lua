@@ -1,11 +1,10 @@
+local os = require('ffi').os
+local env = require('env')
+local tmpdir = os == 'Windows' and env.get('TMP') or '/tmp'
+local db = require("./luz/db").DB:new("sqlite3", tmpdir.."/test.sqlite3")
+local User = require("./luz/db").Model:extend():new(db)
 local app = require("./luz/app").app:new()
-local Model = require("./luz/model").Model
 local JSON = require('rapidjson')
-
-local UserModel = Model:extend()
-local User = UserModel:new("sqlite3", "/tmp/test.sqlite3")
-print("------------------------ User:new")
-p(User)
 
 -- prepare db
 User.db:run"DROP TABLE user"
