@@ -33,8 +33,11 @@ local function process(client, cb)
 			if not req.keepAlive then
 				client:close()
 			end
-		elseif typ == "string" and req.onbody then
-			req.onbody(event)
+		elseif typ == "string" then
+			p(event)
+			if not client:is_closing() then
+				client:close()
+			end
 		elseif not event then
 			client:close()
 		end
