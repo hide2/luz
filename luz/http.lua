@@ -23,8 +23,13 @@ end
 local function process(client, cb)
 	local req, res, body
 	client:read_start(httpDecoder(function(err, event)
-		if err then return end
-		assert(not err, err)
+		if err then
+			p(err)
+			if not client:is_closing() then
+				client:close()
+			end
+			return
+		end
 		local typ = type(event)
 		if typ == "table" then
 			req = event
@@ -39,7 +44,9 @@ local function process(client, cb)
 				client:close()
 			end
 		elseif not event then
-			client:close()
+			if not client:is_closing() then
+				client:close()
+			end
 		end
 	end))
 end
