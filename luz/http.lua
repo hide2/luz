@@ -11,10 +11,16 @@ local function httpDecoder(emit)
 		if err then return emit(err) end
 		input = (input and chunk) and (input .. chunk) or chunk
 		repeat
-			local event, extra = decode(input)
-			if event then
-				input = extra
-				emit(nil, event)
+			local event, extra
+			local ok, ret = xpcall(function()
+				event, extra = decode(input)
+				if event then
+					input = extra
+					emit(nil, event)
+				end
+			end, debug.traceback)
+			if not ok then
+				p(ret)
 			end
 		until not event
 	end
@@ -132,7 +138,8 @@ function Http:request(options, cb)
 				if data then
 					_buffer = _buffer..data
 				else
-					cb(_buffer)
+					local header, body = decode(_buffer)
+					cb(header, body)
 					if not client:is_closing() then
 						client:close()
 					end
